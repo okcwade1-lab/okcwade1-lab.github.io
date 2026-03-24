@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://quantumedgealpha.com/sitemap.xml
