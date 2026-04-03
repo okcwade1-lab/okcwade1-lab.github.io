@@ -1,0 +1,39 @@
+/* ============================= */
+/*          RESET              */
+/* ============================= */
+
+/* Add your resets here */
+
+/* ============================= */
+/*          HEADER              */
+/* ============================= */
+
+/* Block: Header */
+/*
+    Element: Logo
+    Modifier: Active
+*/
+
+/* Block: Navigation */
+/*
+    Element: Link
+    Modifier: Active
+*/
+
+/* ============================= */
+/*           MAIN               */
+/* ============================= */
+
+/* Block: MainContent */
+/*
+    Element: Article
+*/
+
+/* ============================= */
+/*          FOOTER              */
+/* ============================= */
+
+/* Block: Footer */
+/*
+    Element: Copyright
+*/
