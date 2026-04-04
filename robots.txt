@@ -1,3 +1,3 @@
 User-agent: *
-Allow: /
-Sitemap: https://quantumedgealpha.com/sitemap.xml
+Disallow:
+Sitemap: https://okcwade1-lab.github.io/sitemap.xml
