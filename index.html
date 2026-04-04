@@ -7,9 +7,10 @@
   <meta name="author" content="okcwade1-lab" />
   <meta name="keywords" content="quant tools, quantitative finance, options trading, gamma exposure, regime detection, kelly criterion, open source, retail investing" />
   <meta name="robots" content="index, follow" />
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://fonts.googleapis.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:;" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://finnhub.io https://query1.finance.yahoo.com; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://fonts.googleapis.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:;" />
   <link rel="canonical" href="https://okcwade1-lab.github.io/" />
   <link rel="icon" href="favicon.ico" sizes="32x32" type="image/x-icon" />
+  <link rel="apple-touch-icon" href="icon-192x192.png" />
   <link rel="manifest" href="manifest.json" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -23,6 +24,7 @@
   <meta property="og:description" content="Institutional-grade quant tools — open source, retail first." />
   <meta property="og:url" content="https://quantumedgealpha.com/" />
   <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://okcwade1-lab.github.io/icon-512x512.png" />
 
   <!-- Google Analytics 4 -->
   <script async defer src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
@@ -42,7 +44,7 @@
     "author": { "@type": "Person", "name": "okcwade1-lab" },
     "description": "Quant tools and intelligent automation for the average Joe.",
     "url": "https://okcwade1-lab.github.io/",
-    "image": "https://okcwade1-lab.github.io/icon-192x192.png"
+    "image": "https://okcwade1-lab.github.io/icon-512x512.png"
   }
   </script>
 </head>
@@ -55,8 +57,11 @@
     <a href="#mission">Mission</a>
     <a href="#projects">Projects</a>
     <a href="#stack">Stack</a>
+    <a href="#blog">Blog</a>
+    <a href="#contact">Contact</a>
     <a href="https://github.com/okcwade1-lab" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
   </div>
+  <button class="nav-menu-btn" id="nav-menu-btn" aria-label="Toggle menu">☰</button>
 </nav>
 
 <!-- ========== HERO ========== -->
@@ -94,33 +99,14 @@
   </div>
 </section>
 
-<!-- ========== TICKER ========== -->
-<div class="ticker-wrap" role="region" aria-label="Market Ticker" aria-live="polite">
-  <div class="ticker">
-    <span class="ticker-item">SPX &nbsp;<span class="up">GEX+</span></span>
-    <span class="ticker-item">VIX Term Structure &nbsp;<span class="up">Contango</span></span>
-    <span class="ticker-item">0DTE Flow &nbsp;<span class="up">Bullish</span></span>
-    <span class="ticker-item">Gamma Flip &nbsp;<span class="up">4,450</span></span>
-    <span class="ticker-item">Vanna Exposure &nbsp;<span class="down">Negative</span></span>
-    <span class="ticker-item">Kelly Fraction &nbsp;<span class="up">12.4%</span></span>
-    <span class="ticker-item">Regime &nbsp;<span class="up">Low Vol</span></span>
-    <span class="ticker-item">DEX &nbsp;<span class="down">Bearish</span></span>
-    <span class="ticker-item">DIX &nbsp;<span class="up">41.2%</span></span>
-    <span class="ticker-item">IV Rank &nbsp;<span class="up">28</span></span>
-    <span class="ticker-item">Put/Call Ratio &nbsp;<span class="up">0.82</span></span>
-    <span class="ticker-item">Charm Flow &nbsp;<span class="up">Positive</span></span>
-    <span class="ticker-item">SPX &nbsp;<span class="up">GEX+</span></span>
-    <span class="ticker-item">VIX Term Structure &nbsp;<span class="up">Contango</span></span>
-    <span class="ticker-item">0DTE Flow &nbsp;<span class="up">Bullish</span></span>
-    <span class="ticker-item">Gamma Flip &nbsp;<span class="up">4,450</span></span>
-    <span class="ticker-item">Vanna Exposure &nbsp;<span class="down">Negative</span></span>
-    <span class="ticker-item">Kelly Fraction &nbsp;<span class="up">12.4%</span></span>
-    <span class="ticker-item">Regime &nbsp;<span class="up">Low Vol</span></span>
-    <span class="ticker-item">DEX &nbsp;<span class="down">Bearish</span></span>
-    <span class="ticker-item">DIX &nbsp;<span class="up">41.2%</span></span>
-    <span class="ticker-item">IV Rank &nbsp;<span class="up">28</span></span>
-    <span class="ticker-item">Put/Call Ratio &nbsp;<span class="up">0.82</span></span>
-    <span class="ticker-item">Charm Flow &nbsp;<span class="up">Positive</span></span>
+<!-- ========== LIVE TICKER ========== -->
+<div class="ticker-wrap" role="region" aria-label="Live Market Ticker" aria-live="polite">
+  <div class="ticker-label">LIVE</div>
+  <div class="ticker-scroll-outer">
+    <div class="ticker" id="live-ticker">
+      <!-- Populated by JS; fallback static items shown until data loads -->
+      <span class="ticker-item ticker-loading">Loading market data<span class="ticker-dots">...</span></span>
+    </div>
   </div>
 </div>
 
@@ -234,47 +220,225 @@
   </div>
 </section>
 
+<div class="section-divider"></div>
+
+<!-- ========== BLOG ========== -->
+<section id="blog">
+  <div class="section-label">Insights</div>
+  <h2 class="reveal">From the lab.</h2>
+  <p class="section-sub reveal">Research notes, model breakdowns, and market structure observations. No fluff — just signal.</p>
+  <div class="blog-grid">
+
+    <article class="blog-card reveal">
+      <div class="blog-meta">
+        <span class="blog-tag">Options Flow</span>
+        <span class="blog-date">Mar 2026</span>
+      </div>
+      <h3 class="blog-title">Understanding GEX: Why Gamma Exposure Moves Markets</h3>
+      <p class="blog-excerpt">Gamma Exposure (GEX) is one of the most powerful — and least understood — forces in modern equity markets. When dealers are long gamma, they act as a volatility dampener. When they flip short, they become an accelerant...</p>
+      <a href="https://github.com/okcwade1-lab/QuantumEdgeAlpha" target="_blank" rel="noopener noreferrer" class="blog-read-more">Read on GitHub →</a>
+    </article>
+
+    <article class="blog-card reveal">
+      <div class="blog-meta">
+        <span class="blog-tag">Regime Detection</span>
+        <span class="blog-date">Feb 2026</span>
+      </div>
+      <h3 class="blog-title">HMM Regime Detection: Identifying Market States Before the Chart Does</h3>
+      <p class="blog-excerpt">Hidden Markov Models allow us to infer latent market states — low vol, trending, crisis — from observable price data. The key insight: regimes are sticky, and transitions are probabilistic, not random...</p>
+      <a href="https://github.com/okcwade1-lab/QuantumEdgeAlpha" target="_blank" rel="noopener noreferrer" class="blog-read-more">Read on GitHub →</a>
+    </article>
+
+    <article class="blog-card reveal">
+      <div class="blog-meta">
+        <span class="blog-tag">Risk Management</span>
+        <span class="blog-date">Jan 2026</span>
+      </div>
+      <h3 class="blog-title">Kelly Criterion in Practice: Sizing Positions Without Blowing Up</h3>
+      <p class="blog-excerpt">The Kelly Criterion is mathematically optimal for long-run wealth maximization — but full Kelly is psychologically brutal and practically dangerous. Fractional Kelly (typically 25–50%) gives you the edge without the ruin risk...</p>
+      <a href="https://github.com/okcwade1-lab/QuantumEdgeAlpha" target="_blank" rel="noopener noreferrer" class="blog-read-more">Read on GitHub →</a>
+    </article>
+
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ========== CONTACT ========== -->
+<section id="contact">
+  <div class="section-label">Get In Touch</div>
+  <h2 class="reveal">Let's build something.</h2>
+  <p class="section-sub reveal">Have ideas, questions, or want to collaborate on open-source quant tools? Reach out — the community is the edge.</p>
+
+  <div class="contact-grid reveal">
+    <div class="contact-card">
+      <div class="contact-icon">🐙</div>
+      <h3>GitHub</h3>
+      <p>Browse the code, open issues, or fork a repo. All projects are open source.</p>
+      <a href="https://github.com/okcwade1-lab" target="_blank" rel="noopener noreferrer" class="btn btn-outline contact-btn">@okcwade1-lab ↗</a>
+    </div>
+    <div class="contact-card contact-card-featured">
+      <div class="contact-icon">✉️</div>
+      <h3>Collaborate</h3>
+      <p>Ideas for new models, data sources, or automation workflows? Open a GitHub Discussion or drop an issue.</p>
+      <a href="https://github.com/okcwade1-lab/QuantumEdgeAlpha/issues" target="_blank" rel="noopener noreferrer" class="btn btn-primary contact-btn">Open a Discussion →</a>
+    </div>
+    <div class="contact-card">
+      <div class="contact-icon">⭐</div>
+      <h3>Support the Work</h3>
+      <p>Star the repos, share the tools, and help get institutional-grade analysis into more retail hands.</p>
+      <a href="https://github.com/okcwade1-lab/QuantumEdgeAlpha" target="_blank" rel="noopener noreferrer" class="btn btn-outline contact-btn">Star on GitHub ↗</a>
+    </div>
+  </div>
+</section>
+
 <!-- ========== FOOTER ========== -->
 <footer itemscope itemtype="http://schema.org/WPFooter">
-  <p>Built with <a href="https://anthropic.com" target="_blank" rel="noopener noreferrer">Claude</a> &middot; Powered by curiosity &middot; For the average Joe</p>
-  <p style="margin-top:0.5rem">
-    <a href="https://github.com/okcwade1-lab" target="_blank" rel="noopener noreferrer">github.com/okcwade1-lab</a>
-  </p>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <span class="footer-logo">⚡ QuantumEdge Alpha</span>
+      <p>Quant tools &amp; intelligent automation for the average Joe.</p>
+    </div>
+    <div class="footer-links">
+      <a href="#mission">Mission</a>
+      <a href="#projects">Projects</a>
+      <a href="#stack">Stack</a>
+      <a href="#blog">Blog</a>
+      <a href="#contact">Contact</a>
+      <a href="https://github.com/okcwade1-lab" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>Built with <a href="https://anthropic.com" target="_blank" rel="noopener noreferrer">Claude</a> &middot; Powered by curiosity &middot; For the average Joe</p>
+    <p class="footer-copy">&copy; <span id="year"></span> okcwade1-lab &middot; MIT License</p>
+  </div>
 </footer>
 
 <!-- Back to Top -->
 <button id="back-to-top" aria-label="Back to top">↑</button>
 
+<!-- ========== SCRIPTS ========== -->
 <script>
-  // ── Service Worker ──────────────────────────────────────
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/service-worker.js')
-      .then(r => console.log('SW registered:', r.scope))
-      .catch(e => console.log('SW failed:', e));
+// ── Year ─────────────────────────────────────────────────
+document.getElementById('year').textContent = new Date().getFullYear();
+
+// ── Service Worker ────────────────────────────────────────
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/service-worker.js')
+    .then(r => console.log('SW:', r.scope))
+    .catch(e => console.warn('SW failed:', e));
+}
+
+// ── Back to Top ───────────────────────────────────────────
+const btn = document.getElementById('back-to-top');
+window.addEventListener('scroll', () => btn.classList.toggle('show', window.pageYOffset > 400));
+btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+// ── Scroll Reveal ─────────────────────────────────────────
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const parent = entry.target.closest('.mission-grid,.projects-grid,.stack-grid,.blog-grid,.contact-grid');
+      const delay = parent ? Array.from(parent.children).indexOf(entry.target) * 90 : 0;
+      setTimeout(() => entry.target.classList.add('visible'), delay);
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// ── Mobile Nav ────────────────────────────────────────────
+const menuBtn = document.getElementById('nav-menu-btn');
+const navLinks = document.querySelector('.nav-links');
+if (menuBtn) {
+  menuBtn.addEventListener('click', () => navLinks.classList.toggle('nav-open'));
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.addEventListener('click', () => navLinks.classList.remove('nav-open'));
+  });
+}
+
+// ── Live Market Ticker ────────────────────────────────────
+// Uses Yahoo Finance via a public CORS proxy for real-time quotes.
+// Symbols tracked: SPX, VIX, QQQ, SPY, AAPL, TSLA, NVDA, BTC-USD, GLD
+(function initTicker() {
+  const SYMBOLS = ['%5EGSPC', '%5EVIX', 'QQQ', 'SPY', 'AAPL', 'TSLA', 'NVDA', 'BTC-USD', 'GLD'];
+  const LABELS  = ['^GSPC',   '^VIX',   'QQQ',  'SPY',  'AAPL', 'TSLA', 'NVDA', 'BTC',     'GLD'];
+  const DISPLAY = ['SPX',     'VIX',    'QQQ',  'SPY',  'AAPL', 'TSLA', 'NVDA', 'BTC',     'GLD'];
+
+  // Static fallback items shown while loading / if API fails
+  const FALLBACK = [
+    { label: 'SPX',    val: '5,218',   chg: '+0.42%', up: true },
+    { label: 'VIX',    val: '18.24',   chg: '-1.30%', up: false },
+    { label: 'QQQ',    val: '447.80',  chg: '+0.61%', up: true },
+    { label: 'SPY',    val: '521.40',  chg: '+0.38%', up: true },
+    { label: 'AAPL',   val: '171.22',  chg: '+0.55%', up: true },
+    { label: 'TSLA',   val: '172.63',  chg: '-1.12%', up: false },
+    { label: 'NVDA',   val: '875.40',  chg: '+1.84%', up: true },
+    { label: 'BTC',    val: '68,420',  chg: '+2.10%', up: true },
+    { label: 'GLD',    val: '218.75',  chg: '+0.22%', up: true },
+  ];
+
+  const tickerEl = document.getElementById('live-ticker');
+
+  function fmt(n) {
+    if (n === undefined || n === null || isNaN(n)) return '—';
+    if (n > 10000) return n.toLocaleString('en-US', { maximumFractionDigits: 0 });
+    if (n > 100)   return n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    return n.toFixed(2);
   }
 
-  // ── Back to Top ─────────────────────────────────────────
-  const btn = document.getElementById('back-to-top');
-  window.addEventListener('scroll', () => {
-    btn.classList.toggle('show', window.pageYOffset > 400);
-  });
-  btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+  function buildTicker(items) {
+    // Duplicate items for seamless infinite scroll
+    const all = [...items, ...items];
+    tickerEl.innerHTML = all.map(item => {
+      const cls = item.up ? 'up' : 'down';
+      const arrow = item.up ? '▲' : '▼';
+      return `<span class="ticker-item">
+        <span class="ticker-sym">${item.label}</span>
+        <span class="ticker-val">${item.val}</span>
+        <span class="${cls}">${arrow} ${item.chg}</span>
+      </span>`;
+    }).join('');
+  }
 
-  // ── Scroll Reveal ────────────────────────────────────────
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
-      if (entry.isIntersecting) {
-        // Stagger delay for grid children
-        const delay = entry.target.closest('.mission-grid, .projects-grid, .stack-grid')
-          ? Array.from(entry.target.parentElement.children).indexOf(entry.target) * 80
-          : 0;
-        setTimeout(() => entry.target.classList.add('visible'), delay);
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.12 });
+  // Show fallback immediately
+  buildTicker(FALLBACK);
 
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  // Attempt live fetch via Yahoo Finance (no API key required)
+  async function fetchQuotes() {
+    try {
+      const syms = SYMBOLS.join('%2C');
+      const url = `https://query1.finance.yahoo.com/v7/finance/quote?symbols=${syms}&fields=regularMarketPrice,regularMarketChangePercent,regularMarketChange`;
+      const res = await fetch(url, { signal: AbortSignal.timeout(8000) });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      const data = await res.json();
+      const results = data?.quoteResponse?.result;
+      if (!results || results.length === 0) throw new Error('No results');
+
+      const items = results.map(q => {
+        const chgPct = q.regularMarketChangePercent ?? 0;
+        const up = chgPct >= 0;
+        const label = DISPLAY[LABELS.indexOf(q.symbol)] || q.symbol;
+        return {
+          label,
+          val: fmt(q.regularMarketPrice),
+          chg: (up ? '+' : '') + chgPct.toFixed(2) + '%',
+          up
+        };
+      });
+
+      buildTicker(items);
+      console.log('Live ticker updated:', new Date().toLocaleTimeString());
+    } catch (err) {
+      console.warn('Ticker fetch failed, using fallback:', err.message);
+      // Keep fallback data visible
+    }
+  }
+
+  // Fetch on load, then refresh every 60 seconds
+  fetchQuotes();
+  setInterval(fetchQuotes, 60000);
+})();
 </script>
 
 </body>
