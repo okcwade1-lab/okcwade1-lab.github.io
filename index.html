@@ -4,224 +4,51 @@
   <meta name="google-site-verification" content="UQnts9bLfLg23rrq8ZjQAPx-U-1P0CF76sXXPHr6H4k">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="author" content="okcwade1-lab" />
+  <meta name="keywords" content="quant tools, quantitative finance, options trading, gamma exposure, regime detection, kelly criterion, open source, retail investing" />
+  <meta name="robots" content="index, follow" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:;" />
+  <link rel="canonical" href="https://okcwade1-lab.github.io/" />
+  <link rel="icon" href="favicon.ico" sizes="32x32" type="image/x-icon" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="styles.css" />
   <title>QuantumEdge Alpha | okcwade1-lab</title>
   <meta name="description" content="Quant tools and intelligent automation for the average Joe. Because your 401k shouldn't fund a hedge fund's yacht." />
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --bg: #0d1117;
-      --bg2: #161b22;
-      --border: #30363d;
-      --text: #e6edf3;
-      --muted: #8b949e;
-      --accent: #7c3aed;
-      --accent2: #a855f7;
-      --green: #3fb950;
-      --gold: #f0b429;
-    }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
-
-    /* NAV */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0;
-      background: rgba(13, 17, 23, 0.85);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-      padding: 0 2rem;
-      height: 60px;
-      display: flex; align-items: center; justify-content: space-between;
-      z-index: 100;
-    }
-    .nav-logo {
-      font-weight: 700; font-size: 1.1rem;
-      background: linear-gradient(135deg, var(--accent2), var(--gold));
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      text-decoration: none;
-    }
-    .nav-links { display: flex; gap: 1.5rem; }
-    .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.9rem; transition: color 0.2s; }
-    .nav-links a:hover { color: var(--text); }
-
-    /* HERO */
-    .hero {
-      min-height: 100vh;
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      text-align: center;
-      padding: 6rem 2rem 4rem;
-      position: relative;
-      overflow: hidden;
-    }
-    .hero::before {
-      content: '';
-      position: absolute; inset: 0;
-      background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(124,58,237,0.15) 0%, transparent 70%);
-      pointer-events: none;
-    }
-    .hero-badge {
-      display: inline-flex; align-items: center; gap: 0.5rem;
-      background: rgba(124,58,237,0.15);
-      border: 1px solid rgba(124,58,237,0.4);
-      border-radius: 999px;
-      padding: 0.35rem 1rem;
-      font-size: 0.8rem; color: var(--accent2);
-      margin-bottom: 2rem;
-      animation: fadeUp 0.6s ease both;
-    }
-    .pulse { width: 8px; height: 8px; border-radius: 50%; background: var(--green); animation: pulse 2s infinite; }
-    @keyframes pulse { 0%,100%{ opacity:1; transform:scale(1); } 50%{ opacity:0.5; transform:scale(1.4); } }
-
-    h1 {
-      font-size: clamp(2.5rem, 6vw, 4.5rem);
-      font-weight: 800; line-height: 1.1;
-      margin-bottom: 1.5rem;
-      animation: fadeUp 0.6s 0.1s ease both;
-    }
-    h1 span {
-      background: linear-gradient(135deg, var(--accent2) 0%, var(--gold) 100%);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    }
-    .hero-sub {
-      font-size: clamp(1rem, 2vw, 1.25rem);
-      color: var(--muted); max-width: 600px;
-      margin-bottom: 2.5rem;
-      animation: fadeUp 0.6s 0.2s ease both;
-    }
-    .hero-cta {
-      display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;
-      animation: fadeUp 0.6s 0.3s ease both;
-    }
-    .btn {
-      padding: 0.75rem 1.75rem; border-radius: 8px;
-      font-size: 0.95rem; font-weight: 600;
-      text-decoration: none; transition: all 0.2s;
-      cursor: pointer; border: none;
-    }
-    .btn-primary {
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      color: white;
-      box-shadow: 0 4px 20px rgba(124,58,237,0.4);
-    }
-    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 28px rgba(124,58,237,0.5); }
-    .btn-outline {
-      background: transparent;
-      border: 1px solid var(--border);
-      color: var(--text);
-    }
-    .btn-outline:hover { border-color: var(--accent2); color: var(--accent2); }
-
-    /* TICKER */
-    .ticker-wrap {
-      width: 100%; overflow: hidden;
-      border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
-      background: var(--bg2); padding: 0.75rem 0;
-      animation: fadeUp 0.6s 0.4s ease both;
-    }
-    .ticker {
-      display: flex; gap: 3rem;
-      animation: ticker 25s linear infinite;
-      white-space: nowrap;
-    }
-    .ticker-item { font-size: 0.8rem; color: var(--muted); display: flex; align-items: center; gap: 0.5rem; }
-    .ticker-item .up { color: var(--green); }
-    .ticker-item .down { color: #f85149; }
-    @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-
-    /* SECTION */
-    section { padding: 5rem 2rem; max-width: 1100px; margin: 0 auto; }
-    .section-label { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent2); margin-bottom: 1rem; }
-    h2 { font-size: clamp(1.8rem, 3vw, 2.5rem); font-weight: 700; margin-bottom: 1rem; }
-    .section-sub { color: var(--muted); font-size: 1.05rem; max-width: 600px; margin-bottom: 3rem; }
-
-    /* MISSION */
-    .mission-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
-    @media(max-width:700px){ .mission-grid { grid-template-columns: 1fr; } }
-    .mission-card {
-      background: var(--bg2); border: 1px solid var(--border);
-      border-radius: 12px; padding: 2rem;
-      transition: border-color 0.2s;
-    }
-    .mission-card:hover { border-color: var(--accent2); }
-    .mission-card .icon { font-size: 2rem; margin-bottom: 1rem; }
-    .mission-card h3 { font-size: 1.1rem; margin-bottom: 0.5rem; }
-    .mission-card p { color: var(--muted); font-size: 0.95rem; }
-
-    /* PROJECTS */
-    .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px,1fr)); gap: 1.5rem; }
-    .project-card {
-      background: var(--bg2); border: 1px solid var(--border);
-      border-radius: 12px; padding: 1.75rem;
-      text-decoration: none; color: var(--text);
-      transition: all 0.2s; display: block;
-    }
-    .project-card:hover { border-color: var(--accent2); transform: translateY(-4px); box-shadow: 0 8px 30px rgba(0,0,0,0.4); }
-    .project-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem; }
-    .project-name { font-weight: 700; font-size: 1.05rem; }
-    .project-lang { font-size: 0.75rem; color: var(--muted); display: flex; align-items: center; gap: 0.4rem; }
-    .lang-dot { width: 10px; height: 10px; border-radius: 50%; }
-    .project-desc { color: var(--muted); font-size: 0.9rem; margin-bottom: 1rem; line-height: 1.5; }
-    .project-topics { display: flex; flex-wrap: wrap; gap: 0.4rem; }
-    .topic { font-size: 0.7rem; padding: 0.2rem 0.6rem; border-radius: 999px; background: rgba(124,58,237,0.15); color: var(--accent2); border: 1px solid rgba(124,58,237,0.3); }
-
-    /* STACK */
-    .stack-grid { display: flex; flex-wrap: wrap; gap: 0.75rem; }
-    .stack-item {
-      background: var(--bg2); border: 1px solid var(--border);
-      border-radius: 8px; padding: 0.6rem 1rem;
-      font-size: 0.85rem; font-weight: 500;
-      transition: border-color 0.2s;
-    }
-    .stack-item:hover { border-color: var(--accent2); color: var(--accent2); }
-
-    /* QUOTE */
-    .quote-section {
-      background: var(--bg2); border: 1px solid var(--border);
-      border-left: 4px solid var(--accent);
-      border-radius: 0 12px 12px 0;
-      padding: 2rem 2.5rem; margin: 2rem 0;
-    }
-    .quote-text { font-size: 1.2rem; font-style: italic; margin-bottom: 0.5rem; }
-    .quote-attr { color: var(--muted); font-size: 0.85rem; }
-
-    /* FOOTER */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 2rem; text-align: center;
-      color: var(--muted); font-size: 0.85rem;
-    }
-    footer a { color: var(--accent2); text-decoration: none; }
-
-    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-  </style>
-
+  
   <!-- Google Analytics 4 -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script async defer src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', 'G-XXXXXXXXXX');
   </script>
+
+  <!-- JSON-LD Structured Data for SEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "QuantumEdge Alpha",
+    "author": {
+      "@type": "Person",
+      "name": "okcwade1-lab"
+    },
+    "description": "Quant tools and intelligent automation for the average Joe. Because your 401k shouldn't fund a hedge fund's yacht.",
+    "url": "https://okcwade1-lab.github.io/",
+    "image": "https://okcwade1-lab.github.io/icon-192x192.png"
+  }
+  </script>
 </head>
 <body>
 
-<nav>
-  <a class="nav-logo" href="#">⚡ QuantumEdge Alpha</a>
+<nav role="navigation" aria-label="Main Navigation">
+  <a class="nav-logo" href="#" aria-label="QuantumEdge Alpha Home">⚡ QuantumEdge Alpha</a>
   <div class="nav-links">
     <a href="#mission">Mission</a>
     <a href="#projects">Projects</a>
     <a href="#stack">Stack</a>
-    <a href="https://github.com/okcwade1-lab" target="_blank">GitHub</a>
+    <a href="https://github.com/okcwade1-lab" target="_blank" rel="noopener noreferrer">GitHub</a>
   </div>
 </nav>
 
@@ -230,12 +57,12 @@
   <h1>Institutional edge.<br/><span>For everyone.</span></h1>
   <p class="hero-sub">Retail was the liquidity. Not anymore. Quant tools &amp; intelligent automation for the average Joe — because your 401k shouldn't fund a hedge fund's yacht.</p>
   <div class="hero-cta">
-    <a href="https://github.com/okcwade1-lab/QuantumEdgeAlpha" target="_blank" class="btn btn-primary">View QuantumEdgeAlpha →</a>
+    <a href="https://github.com/okcwade1-lab/QuantumEdgeAlpha" target="_blank" rel="noopener noreferrer" class="btn btn-primary">View QuantumEdgeAlpha →</a>
     <a href="#mission" class="btn btn-outline">Learn More</a>
   </div>
 </section>
 
-<div class="ticker-wrap">
+<div class="ticker-wrap" role="region" aria-label="Market Ticker" aria-live="polite">
   <div class="ticker">
     <span class="ticker-item">SPX <span class="up">GEX+</span></span>
     <span class="ticker-item">VIX Term Structure <span class="up">Contango</span></span>
@@ -277,17 +104,17 @@
   <h2>The tools we're building.</h2>
   <p class="section-sub">Every repo is a piece of the puzzle — free, open, and built for the person who's tired of being on the wrong side of the trade.</p>
   <div class="projects-grid">
-    <a class="project-card" href="https://github.com/okcwade1-lab/QuantumEdgeAlpha" target="_blank">
+    <a class="project-card" href="https://github.com/okcwade1-lab/QuantumEdgeAlpha" target="_blank" rel="noopener noreferrer">
       <div class="project-header"><span class="project-name">⚡ QuantumEdgeAlpha</span><span class="project-lang"><span class="lang-dot" style="background:#3776ab"></span>Python</span></div>
       <p class="project-desc">Institutional-grade quant dashboard — Greeks, GEX/DEX/VEX, vol surface, HMM regime, Monte Carlo, Kelly sizing, 0DTE scanner.</p>
       <div class="project-topics"><span class="topic">options-trading</span><span class="topic">gamma-exposure</span><span class="topic">regime-detection</span><span class="topic">kelly-criterion</span></div>
     </a>
-    <a class="project-card" href="https://github.com/okcwade1-lab/TradingPlatform" target="_blank">
+    <a class="project-card" href="https://github.com/okcwade1-lab/TradingPlatform" target="_blank" rel="noopener noreferrer">
       <div class="project-header"><span class="project-name">🔵 TradingPlatform</span><span class="project-lang"><span class="lang-dot" style="background:#3776ab"></span>Python</span></div>
       <p class="project-desc">Core trading infrastructure — data pipelines, signal generation, and systematic execution for derivatives markets.</p>
       <div class="project-topics"><span class="topic">algorithmic-trading</span><span class="topic">derivatives</span><span class="topic">signal-generation</span></div>
     </a>
-    <a class="project-card" href="https://github.com/okcwade1-lab/Upwork-Scout" target="_blank">
+    <a class="project-card" href="https://github.com/okcwade1-lab/Upwork-Scout" target="_blank" rel="noopener noreferrer">
       <div class="project-header"><span class="project-name">🟠 Upwork-Scout</span><span class="project-lang"><span class="lang-dot" style="background:#3178c6"></span>TypeScript</span></div>
       <p class="project-desc">AI-powered automation for sourcing and tracking freelance opportunities. Find signal in the noise.</p>
       <div class="project-topics"><span class="topic">ai-agent</span><span class="topic">automation</span><span class="topic">typescript</span></div>
@@ -312,10 +139,40 @@
   </div>
 </section>
 
-<footer>
-  <p>Built with <a href="https://anthropic.com" target="_blank">Claude</a> · Powered by curiosity · For the average Joe</p>
-  <p style="margin-top:0.5rem"><a href="https://github.com/okcwade1-lab" target="_blank">github.com/okcwade1-lab</a></p>
+<footer itemscope itemtype="http://schema.org/WPFooter">
+  <p>Built with <a href="https://anthropic.com" target="_blank" rel="noopener noreferrer">Claude</a> · Powered by curiosity · For the average Joe</p>
+  <p style="margin-top:0.5rem"><a href="https://github.com/okcwade1-lab" target="_blank" rel="noopener noreferrer">github.com/okcwade1-lab</a></p>
 </footer>
 
+<!-- Back to Top Button -->
+<button id="back-to-top" aria-label="Back to top">↑</button>
+
+<!-- Service Worker Registration & Back-to-Top Functionality -->
+<script>
+  // Service Worker Registration for PWA Support
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/service-worker.js').then(registration => {
+      console.log('Service Worker registered with scope:', registration.scope);
+    }).catch(err => {
+      console.log('Service Worker registration failed:', err);
+    });
+  }
+
+  // Back to Top Button Functionality
+  const backToTopBtn = document.getElementById('back-to-top');
+  
+  window.addEventListener('scroll', () => {
+    if (window.pageYOffset > 300) {
+      backToTopBtn.classList.add('show');
+    } else {
+      backToTopBtn.classList.remove('show');
+    }
+  });
+
+  backToTopBtn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+</script>
+
 </body>
-  </html>
+</html>
